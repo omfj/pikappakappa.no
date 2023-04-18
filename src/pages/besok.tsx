@@ -54,7 +54,10 @@ const VisitorPage = () => {
   );
 
   return (
-    <DefaultLayout title="Besøk" description="Besøk Pi Kappa Kappa">
+    <DefaultLayout
+      title="Besøk | Pi Kappa Kappa"
+      description="Meld ditt besøk til Pi Kappa Kappa her."
+    >
       <Container>
         <Heading className="text-center text-3xl font-bold">
           Meld om besøk
