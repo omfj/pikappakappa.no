@@ -15,6 +15,10 @@ const ROUTES = [
     label: "Besøk",
     to: "/besok",
   },
+  {
+    label: "17. Mai",
+    to: "/17mai",
+  },
 ];
 
 const Header = () => {
