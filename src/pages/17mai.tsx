@@ -5,8 +5,8 @@ import DefaultLayout from "@/layouts/default";
 const BylawsPage = () => {
   return (
     <DefaultLayout
-      title="Vedtekter"
-      description="Pi Kappa Kappa sine vedtekter"
+      title="17. Mai 2023"
+      description="Timeplan for 17. Mai 2023"
     >
       <Container>
         <article className="prose text-center">
