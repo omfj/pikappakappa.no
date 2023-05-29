@@ -2,76 +2,97 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-// Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
-    @@unique([provider, providerAccountId])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-enum Role {
-    ADMIN
-    USER
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    role          Role      @default(USER)
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
 }
 
-model Visitor {
-    email  String  @id
-    name   String
-    visits Visit[]
+model Member {
+  id        String            @id @default(cuid())
+  email     String
+  name      String
+  socials   SocialAccount[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  visits    VisitMembership[]
+}
+
+enum SocialProvider {
+  TWITTER
+  GITHUB
+  LINKEDIN
+  INSTAGRAM
+}
+
+model SocialAccount {
+  id       String         @id @default(cuid())
+  provider SocialProvider
+  url      String
+  Member   Member?        @relation(fields: [memberId], references: [id])
+  memberId String?
 }
 
 model Visit {
-    id        String   @id @default(cuid())
-    visitorId String
-    visitor   Visitor  @relation(fields: [visitorId], references: [email], onDelete: Cascade)
-    visiting  String
-    reason    String
-    date      DateTime @default(now())
+  id       String            @id @default(cuid())
+  name     String
+  email    String
+  reason   String            @db.Text
+  visiting VisitMembership[]
+}
+
+model VisitMembership {
+  visitId  String
+  memberId String
+  member   Member @relation(fields: [memberId], references: [id])
+  visit    Visit  @relation(fields: [visitId], references: [id])
+
+  @@id([visitId, memberId])
 }

@@ -1,7 +1,8 @@
-import { type Config } from "tailwindcss";
+import { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+const config = {
+  content: ["./src/**/*.{ts,tsx}"],
   theme: {
     container: {
       center: true,
@@ -11,39 +12,18 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        primary: ["var(--font-source)", ...fontFamily.sans],
+        display: ["var(--font-cardo)", ...fontFamily.sans],
+      },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
+        border: "var(--border)",
+        input: "var(--input)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        destructive: "var(--destructive)",
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "var(--muted)",
         },
       },
       borderRadius: {
@@ -68,8 +48,10 @@ module.exports = {
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
+    require("tailwindcss-animate"),
   ],
 } satisfies Config;
+
+export default config;

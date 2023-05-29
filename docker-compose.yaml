@@ -1,17 +1,18 @@
-version: "3.9"
+version: "3.8"
 
 services:
   db:
-    container_name: pikk-db
     image: postgres:latest
     restart: always
+    container_name: pi-kappa-kappa-db
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
-    volumes:
-      - db:/var/lib/postgresql/data
+      POSTGRES_DB: pi-kappa-kappa
     ports:
       - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
 
 volumes:
   db:

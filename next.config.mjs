@@ -1,27 +1,12 @@
-import addMdx from "@next/mdx";
+import nextMDX from "@next/mdx";
 
-/**
- * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
- * for Docker builds.
- */
-await import("./src/env.mjs");
-
-const withMdx = addMdx({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-  },
-});
-
-/** @type {import("next").NextConfig} */
-const config = {
-  reactStrictMode: true,
-
-  i18n: {
-    locales: ["no"],
-    defaultLocale: "no",
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    mdxRs: true,
   },
 };
 
-export default withMdx(config);
+const withMDX = nextMDX();
+
+export default withMDX(nextConfig);
