@@ -9,6 +9,7 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -125,6 +126,7 @@ export function VisitForm({
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
+              <FormDescription>Hvorfor kommer du på besøk?</FormDescription>
               <FormMessage />
             </FormItem>
           )}

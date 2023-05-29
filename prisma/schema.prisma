@@ -42,9 +42,16 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  type          Role      @default(USER)
+  biography     String?   @db.Text
   image         String?
   accounts      Account[]
   sessions      Session[]
+}
+
+enum Role {
+  ADMIN
+  USER
 }
 
 model VerificationToken {

@@ -74,7 +74,6 @@ HeaderLogo.displayName = "HeaderLogo";
 export type Route = {
   href: string;
   label: string;
-  condition?: () => boolean;
 };
 
 export type NavigationProps = HTMLAttributes<HTMLDivElement> & {
@@ -88,11 +87,13 @@ export const Navigation = React.forwardRef<HTMLDivElement, NavigationProps>(
     return (
       <nav ref={ref} {...props}>
         <ul className="hidden md:flex flex-row items-center">
-          {routes.map((route) => (
-            <NavItem key={route.href} href={route.href}>
-              {route.label}
-            </NavItem>
-          ))}
+          {routes.map((route) => {
+            return (
+              <NavItem key={route.href} href={route.href}>
+                {route.label}
+              </NavItem>
+            );
+          })}
         </ul>
         <div className="block md:hidden flex-row items-center">
           <button onClick={toggleOpen}>

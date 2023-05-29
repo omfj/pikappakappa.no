@@ -11,7 +11,7 @@ const sourceSansPro = Source_Sans_Pro({
 const cardo = Cardo({
   subsets: ["latin"],
   variable: "--font-cardo",
-  weight: "700",
+  weight: ["400", "700"],
 });
 
 export const metadata = {

@@ -1,12 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import React, { HTMLAttributes } from "react";
-import { usePathname } from "next/navigation";
-import { generateId } from "@/utils/generate-id";
 import { VariantProps, cva } from "class-variance-authority";
 
-const heading = cva("group font-display relative my-10", {
+const heading = cva("group font-display font-bold relative my-10", {
   variants: {
     level: {
       1: "text-5xl",
