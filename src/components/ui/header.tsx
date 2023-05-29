@@ -5,9 +5,11 @@ import React, {
   HTMLAttributes,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 
 const HeaderContext = createContext<{
   isOpen: boolean;
@@ -30,10 +32,15 @@ export const Header = React.forwardRef<
   HTMLAttributes<HTMLDivElement>
 >(({ children, ...props }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const setOpen = () => setIsOpen(true);
   const setClose = () => setIsOpen(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <HeaderContext.Provider
