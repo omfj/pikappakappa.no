@@ -19,10 +19,15 @@ export function PreviewProfile({ user }: { user: User }) {
           <p className="text-xl">{user?.email}</p>
         </div>
       </div>
-      <div>
-        <p className="text-2xl font-bold">Biografi</p>
-        <p>{user.biography}</p>
-      </div>
+      {user?.biography && (
+        <div>
+          {user.biography.split("\n").map((paragraph, index) => (
+            <p key={index} className="text-lg">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      )}
     </main>
   );
 }
