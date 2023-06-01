@@ -52,7 +52,7 @@ export const Header = React.forwardRef<
       }}
     >
       <header
-        className="flex border-b justify-between flex-row items-baseline mb-4 p-4 md:p-8"
+        className="flex border-b justify-between h-20 flex-row items-center p-4 md:p-8"
         ref={ref}
         {...props}
       >
@@ -102,12 +102,12 @@ export const Navigation = React.forwardRef<HTMLDivElement, NavigationProps>(
             );
           })}
         </ul>
-        <div className="block md:hidden flex-row items-center">
-          <button onClick={toggleOpen}>
+        <div className="flex md:hidden flex-row">
+          <button className="h-full" onClick={toggleOpen}>
             {isOpen ? (
-              <XMarkIcon className="h-6 w-6" />
+              <XMarkIcon className="h-8 w-8" />
             ) : (
-              <Bars3Icon className="h-6 w-6" />
+              <Bars3Icon className="h-8 w-8" />
             )}
           </button>
         </div>

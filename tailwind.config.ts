@@ -16,6 +16,9 @@ const config = {
         primary: ["var(--font-source)", ...fontFamily.sans],
         display: ["var(--font-cardo)", ...fontFamily.sans],
       },
+      aspectRatio: {
+        profile: "9 / 16",
+      },
       colors: {
         border: "var(--border)",
         input: "var(--input)",

@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function Bylaws() {
   return (
-    <main className="container my-10">
+    <main className="container max-w-3xl my-10">
       <BylawsContent components={components} />
     </main>
   );

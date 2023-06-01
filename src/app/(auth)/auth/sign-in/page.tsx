@@ -12,7 +12,7 @@ export default async function SignIn() {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
-      <main className="rounded-md space-y-8 border shadow-md max-w-md px-10 py-16 bg-white">
+      <main className="rounded-md space-y-8 border shadow-md max-w-md px-10 py-16 text-black bg-white">
         <div className="text-center">
           <Link className="font-display text-3xl" href="/">
             ΠΚΚ
