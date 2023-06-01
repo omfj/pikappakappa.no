@@ -142,7 +142,7 @@ export const NavItem = React.forwardRef<HTMLLIElement, NavItemProps>(
     return (
       <li ref={ref} {...props}>
         <Link
-          className="px-4 py-2 text-md font-medium align-middle rounded-lg hover:bg-muted transition-colors duration-200 ease-in-out"
+          className="px-3 py-2 text-sm font-medium uppercase align-middle rounded-lg hover:bg-muted transition-colors duration-200 ease-in-out"
           href={href}
         >
           {children}

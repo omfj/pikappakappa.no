@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { SignInButtons } from "./sign-in-buttons";
-import { getServerUser } from "@/lib/auth/session";
 import { redirect } from "next/navigation";
+import { getSession } from "@/lib/auth/session";
 
 export default async function SignIn() {
-  const user = await getServerUser();
+  const user = await getSession();
 
   if (user) {
     return redirect("/");

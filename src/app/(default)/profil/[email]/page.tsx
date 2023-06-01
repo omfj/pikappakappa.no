@@ -1,8 +1,8 @@
-import { getServerUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/client";
 import { PreviewProfile } from "./preview-profile";
 import { notFound } from "next/navigation";
 import { PersonalProfile } from "./personal-profile";
+import { getSession } from "@/lib/auth/session";
 
 type Props = {
   params: {
@@ -13,7 +13,7 @@ type Props = {
 export default async function ProfilePage({ params }: Props) {
   const { email } = params;
 
-  const user = await getServerUser();
+  const user = await getSession();
 
   const encodedEmail = encodeURIComponent(user?.email ?? "");
   const isSame = encodedEmail === email;

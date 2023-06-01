@@ -1,9 +1,9 @@
-import { getServerUser } from "@/lib/auth/session";
 import Link from "next/link";
 import { Header, HeaderLogo, Navigation, Route } from "./ui/header";
+import { getSession } from "@/lib/auth/session";
 
 export async function SiteHeader() {
-  const user = await getServerUser();
+  const user = await getSession();
 
   const commonRoutes: Array<Route> = [
     {
@@ -26,7 +26,7 @@ export async function SiteHeader() {
 
   const authedRoutes: Array<Route> = [
     {
-      href: "/profil/me",
+      href: `/profil/${encodeURIComponent(user?.email ?? "")}`,
       label: "Profil",
     },
     {

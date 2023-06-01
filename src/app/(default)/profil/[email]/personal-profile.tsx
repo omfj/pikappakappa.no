@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { userSchema } from "@/lib/validators/user";
 import { useState } from "react";
+import Link from "next/link";
 
 export function PersonalProfile({ user }: { user: User }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -90,10 +91,15 @@ export function PersonalProfile({ user }: { user: User }) {
               )}
             />
           </div>
-          <div>
+          <div className="flex flex-row gap-2">
             <Button disabled={isLoading}>
               {isLoading ? "Oppdaterer..." : "Oppdater profil"}
             </Button>
+            {user.type === "ADMIN" && (
+              <Button asChild>
+                <Link href="/admin">Admin</Link>
+              </Button>
+            )}
           </div>
         </form>
       </Form>

@@ -96,10 +96,11 @@ model Visit {
 }
 
 model VisitMembership {
-  visitId  String
-  memberId String
-  member   Member @relation(fields: [memberId], references: [id])
-  visit    Visit  @relation(fields: [visitId], references: [id])
+  visitId   String
+  memberId  String
+  member    Member   @relation(fields: [memberId], references: [id])
+  visit     Visit    @relation(fields: [visitId], references: [id])
+  createdAt DateTime @default(now())
 
   @@id([visitId, memberId])
 }
