@@ -44,6 +44,8 @@ export function PersonalProfile({ user }: { user: User }) {
 
   return (
     <main>
+      <h1 className="text-4xl font-bold text-center my-4">Min profil</h1>
+
       <Form {...methods}>
         <form
           onSubmit={onSubmit}

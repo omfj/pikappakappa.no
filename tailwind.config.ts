@@ -25,6 +25,7 @@ const config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         destructive: "var(--destructive)",
+        ring: "var(--ring)",
         muted: {
           DEFAULT: "var(--muted)",
         },

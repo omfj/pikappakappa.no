@@ -11,6 +11,7 @@ const button = cva(
       variant: {
         default: "bg-foreground text-background hover:bg-foreground/90",
         link: "underline-offset-4 hover:underline text-foreground",
+        inverted: "bg-background text-foreground hover:bg-background/90",
       },
       size: {
         default: "h-10 py-2 px-4",
