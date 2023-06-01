@@ -1,4 +1,4 @@
-import { getServerUser } from "@/lib/auth/session";
+import { getSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/client";
 import { userSchema } from "@/lib/validators/user";
 import { NextResponse } from "next/server";
@@ -17,14 +17,14 @@ export async function POST(
   try {
     const { id } = context.params;
     const payload = await userSchema.parseAsync(await request.json());
-    const user = await getServerUser();
+    const session = await getSession();
 
-    if (user?.id !== id) {
+    if (session?.id !== id) {
       return new Response("Unauthorized", { status: 401 });
     }
 
     const updatedUser = await prisma.user.update({
-      where: { id: user.id },
+      where: { id: session.id },
       data: {
         name: payload.name,
         biography: payload.bio,
