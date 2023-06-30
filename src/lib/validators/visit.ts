@@ -1,10 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const visitSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  visiting: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: "Du må besøke minst en person",
-  }),
-  reason: z.string(),
+	name: z.string().min(1),
+	email: z.string().email(),
+	visiting: z.string().array().min(1),
+	reason: z.string().min(3).max(1000)
 });

@@ -2,17 +2,18 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:latest
+    image: postgres:14.7
     restart: always
-    container_name: pi-kappa-kappa-db
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: pi-kappa-kappa
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db
     ports:
-      - "5432:5432"
+        - 5432:5432
     volumes:
       - db:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
 
 volumes:
   db:
