@@ -29,6 +29,8 @@ export const actions = {
 		}
 
 		const { username, password } = form.data;
+		// TODO: Implement "remember me"
+		const remember = true;
 
 		const user = await validateUser(username, password);
 
@@ -42,7 +44,8 @@ export const actions = {
 
 		try {
 			cookies.set('session', session.id, {
-				secure: dev ? false : true
+				secure: dev ? false : true,
+				expires: remember ? session.expires : undefined
 			});
 		} catch (e) {
 			console.log(e);
