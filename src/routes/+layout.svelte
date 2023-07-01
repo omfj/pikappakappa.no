@@ -12,7 +12,7 @@
 
 <Header />
 
-<main class="max-w-2xl mx-auto w-full px-4 flex-1">
+<main class="max-w-4xl mx-auto w-full px-4 flex-1">
 	<slot />
 </main>
 

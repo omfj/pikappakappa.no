@@ -60,6 +60,11 @@
 	</div>
 
 	<div>
+		<input type="checkbox" name="remember" id="remember" bind:checked={$form.remember} />
+		<label for="remember">Husk meg</label>
+	</div>
+
+	<div>
 		<button type="submit" class="bg-blue-600 text-white rounded-md p-2">Logg inn</button>
 	</div>
 </form>

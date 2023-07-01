@@ -7,17 +7,16 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"db:generate-migration": "drizzle-kit generate:pg",
-		"db:migrate": "tsx ./src/lib/db/migrate.ts",
-		"db:seed": "tsx ./src/lib/db/seed.ts",
+		"db:migrate": "pnpm run exec ./src/lib/db/migrate.ts",
+		"db:seed": "pnpm run exec ./src/lib/db/seed.ts",
 		"docker:up": "docker-compose up -d",
-		"docker:down": "docker-compose down"
+		"docker:down": "docker-compose down",
+		"exec": "vite-node --options.transformMode.ssr='/.*/'"
 	},
 	"dependencies": {
 		"clsx": "^1.2.1",
@@ -28,11 +27,11 @@
 		"svelte-french-toast": "^1.1.0",
 		"sveltekit-superforms": "^1.1.2",
 		"uuid": "^9.0.0",
+		"vite-node": "^0.32.2",
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.28.1",
-		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-vercel": "^3.0.1",
 		"@sveltejs/kit": "^1.20.4",
 		"@types/marked": "^5.0.0",
 		"@types/pg": "^8.10.2",
@@ -50,9 +49,7 @@
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.3.2",
 		"tslib": "^2.4.1",
-		"tsx": "^3.12.7",
 		"typescript": "^5.0.0",
-		"vite": "^4.3.6",
-		"vitest": "^0.25.3"
+		"vite": "^4.3.6"
 	}
 }

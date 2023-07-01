@@ -14,12 +14,18 @@
 	<p class="text-green-500">Innlegget ble laget!</p>
 {/if}
 
-<h1>Lag et innlegg</h1>
+<h1 class="text-3xl font-medium mb-5">Lag et innlegg</h1>
 
 <form class="space-y-2" method="post" use:enhance>
 	<div class="flex flex-col gap-2">
 		<label for="title">Tittel</label>
-		<input type="text" id="title" name="title" bind:value={$form.title} />
+		<input
+			type="text"
+			id="title"
+			name="title"
+			class="p-2 border bg-gray-200 rounded"
+			bind:value={$form.title}
+		/>
 		{#if $errors.title}
 			<p class="text-red-500">{$errors.title}</p>
 		{/if}
@@ -27,7 +33,13 @@
 
 	<div class="flex flex-col gap-2">
 		<label for="body">Innhold</label>
-		<textarea id="body" name="body" bind:value={$form.body} />
+		<textarea
+			id="body"
+			name="body"
+			class="p-2 border bg-gray-200 rounded"
+			rows="10"
+			bind:value={$form.body}
+		/>
 		{#if $errors.body}
 			<p class="text-red-500">{$errors.body}</p>
 		{/if}

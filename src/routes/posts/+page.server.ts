@@ -1,6 +1,7 @@
 import { db } from '$lib/db/drizzle';
+import type { PageServerLoad } from './$types';
 
-export const load = async ({ locals }) => {
+export const load = (async ({ locals }) => {
 	const posts = await db.query.posts.findMany({
 		orderBy: (post, { desc }) => desc(post.createdAt)
 	});
@@ -11,4 +12,4 @@ export const load = async ({ locals }) => {
 		posts,
 		canPost
 	};
-};
+}) satisfies PageServerLoad;

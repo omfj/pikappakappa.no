@@ -28,9 +28,7 @@ export const actions = {
 			return fail(400, { form });
 		}
 
-		const { username, password } = form.data;
-		// TODO: Implement "remember me"
-		const remember = true;
+		const { username, password, remember } = form.data;
 
 		const user = await validateUser(username, password);
 

@@ -1,12 +1,12 @@
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
-import { db } from './drizzle.ts/index.js';
+import { db } from './drizzle';
 
 migrate(db, { migrationsFolder: './src/lib/db/migrations' })
 	.then(() => {
-		console.log('Migrations complete!');
+		console.log('✅ Migrations complete!');
 		process.exit(0);
 	})
 	.catch((err) => {
-		console.error('Migrations failed!', err);
+		console.error('❌ Migrations failed! Error:', err);
 		process.exit(1);
 	});
