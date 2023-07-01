@@ -33,7 +33,7 @@ export const actions = {
 			return fail(400, { form });
 		}
 
-		const { email, username, firstName, lastName } = form.data;
+		const { email, username } = form.data;
 
 		// Check if username or email already exists
 		const existingUsers = await db
@@ -60,15 +60,7 @@ export const actions = {
 			}
 		}
 
-		await db
-			.update(users)
-			.set({
-				email,
-				username,
-				firstName,
-				lastName
-			})
-			.where(eq(users.id, locals.user.id));
+		await db.update(users).set(form.data).where(eq(users.id, locals.user.id));
 
 		return {
 			form

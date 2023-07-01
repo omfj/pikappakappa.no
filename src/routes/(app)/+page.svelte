@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Pi Kappa Kappa</title>
+</svelte:head>
+
 <section class="min-h-[90vh] flex flex-col text-center">
 	<div class="mt-32 space-y-2">
 		<h1 class="text-5xl font-semibold">Pi Kappa Kappa</h1>

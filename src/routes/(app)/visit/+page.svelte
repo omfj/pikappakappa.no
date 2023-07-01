@@ -18,6 +18,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Besøk</title>
+</svelte:head>
+
 <h1 class="text-3xl font-medium mb-5">Meld besøk</h1>
 
 <form class="space-y-4" method="post" use:enhance>

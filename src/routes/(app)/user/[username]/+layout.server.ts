@@ -19,7 +19,14 @@ export const load = (async ({ params, locals }) => {
 	const isUser = locals.user?.id === user.id;
 
 	return {
-		user,
+		user: {
+			id: user.id,
+			username: user.username,
+			email: user.email,
+			firstName: user.firstName,
+			lastName: user.lastName,
+			bio: user.bio
+		},
 		isUser
 	};
 }) satisfies LayoutServerLoad;

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import '../app.css';
+	import '../../app.css';
 	import Header from '$lib/components/Header.svelte';
 	import { user } from '$lib/stores/user';
-	import type { LayoutData } from './$types';
+	import type { LayoutData } from '../$types';
 	import Footer from '$lib/components/Footer.svelte';
 
 	export let data: LayoutData;

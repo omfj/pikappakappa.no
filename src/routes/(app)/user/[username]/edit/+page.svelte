@@ -9,11 +9,11 @@
 	const { form, constraints, errors, enhance, submitting } = superForm(data.form);
 </script>
 
-<h1 class="text-3xl font-medium mb-5">Edit user</h1>
+<h1 class="text-3xl font-medium mb-5">Rediger bruker</h1>
 
 <form class="space-y-4" method="post" use:enhance>
 	<div class="flex flex-col gap-2">
-		<label for="username">Username</label>
+		<label for="username">Brukernavn</label>
 		<input
 			type="text"
 			name="username"
@@ -32,7 +32,7 @@
 	</div>
 
 	<div class="flex flex-col gap-2">
-		<label for="email">Email</label>
+		<label for="email">E-post</label>
 		<input
 			type="email"
 			name="email"
@@ -51,7 +51,7 @@
 	</div>
 
 	<div class="flex flex-col gap-2">
-		<label for="firstName">First name</label>
+		<label for="firstName">Fornavn</label>
 		<input
 			type="text"
 			name="firstName"
@@ -70,7 +70,7 @@
 	</div>
 
 	<div class="flex flex-col gap-2">
-		<label for="lastName">Last name</label>
+		<label for="lastName">Etternavn</label>
 		<input
 			type="text"
 			name="lastName"
@@ -85,6 +85,26 @@
 		/>
 		{#if $errors.lastName}
 			<p class="text-red-500">{$errors.lastName}</p>
+		{/if}
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<label for="bio">Biografi</label>
+		<textarea
+			name="bio"
+			id="bio"
+			aria-invalid={$errors.bio ? 'true' : undefined}
+			placeholder="Skriv litt om deg selv..."
+			rows="4"
+			class={clsx('p-2 border bg-gray-200 rounded', {
+				'border-red-500': $errors.bio
+			})}
+			bind:value={$form.bio}
+			{...$constraints.bio}
+		/>
+		<p>{$form.bio?.length ?? 0} / 300</p>
+		{#if $errors.bio}
+			<p class="text-red-500">{$errors.bio}</p>
 		{/if}
 	</div>
 

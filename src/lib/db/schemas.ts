@@ -28,6 +28,7 @@ export const users = pgTable(
 		firstName: varchar('first_name', { length: 255 }),
 		lastName: varchar('last_name', { length: 255 }),
 		type: userType('type').default('USER').notNull(),
+		bio: varchar('bio', { length: 300 }),
 		createdAt: timestamp('created_at').defaultNow().notNull(),
 		updatedAt: timestamp('updated_at').defaultNow().notNull()
 	},
