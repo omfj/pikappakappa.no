@@ -1,27 +1,27 @@
 {
-  "version": "5",
-  "dialect": "pg",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1687977214600,
-      "tag": "0000_strong_magma",
-      "breakpoints": false
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1688068298679,
-      "tag": "0001_mature_loners",
-      "breakpoints": false
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1688208629105,
-      "tag": "0002_broad_captain_britain",
-      "breakpoints": false
-    }
-  ]
+	"version": "5",
+	"dialect": "pg",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1687977214600,
+			"tag": "0000_strong_magma",
+			"breakpoints": false
+		},
+		{
+			"idx": 1,
+			"version": "5",
+			"when": 1688068298679,
+			"tag": "0001_mature_loners",
+			"breakpoints": false
+		},
+		{
+			"idx": 2,
+			"version": "5",
+			"when": 1688208629105,
+			"tag": "0002_broad_captain_britain",
+			"breakpoints": false
+		}
+	]
 }

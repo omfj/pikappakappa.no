@@ -6,6 +6,8 @@ import { visitSchema } from '$lib/validators/visit';
 import { users, visits, visitsToUsers } from '$lib/db/schemas';
 import { and, eq, inArray, or } from 'drizzle-orm';
 
+export const prerender = true;
+
 export const load = (async () => {
 	const members = await db.query.users.findMany({
 		where: (member, { eq, or }) => or(eq(member.type, 'MEMBER'), eq(member.type, 'ADMIN'))
