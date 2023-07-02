@@ -9,8 +9,18 @@ import { and, eq, inArray, or } from 'drizzle-orm';
 export const load = (async () => {
 	const form = await superValidate(visitSchema);
 
+	const users = await db.query.users.findMany({
+		where: (user, { or, eq }) => or(eq(user.type, 'MEMBER'), eq(user.type, 'ADMIN'))
+	});
+	const members = users.map((user) => ({
+		id: user.id,
+		name:
+			user.firstName || user.lastName ? `${user.firstName} ${user.lastName}`.trim() : user.username
+	}));
+
 	return {
-		form
+		form,
+		members
 	};
 }) satisfies PageServerLoad;
 

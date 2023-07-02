@@ -3,8 +3,6 @@
 	import type { PageData } from './$types';
 	import clsx from 'clsx';
 
-	const members: Array<{ id: string; name: string }> = [];
-
 	export let data: PageData;
 
 	const { form, constraints, errors, enhance } = superForm(data.form, {
@@ -59,16 +57,17 @@
 
 	<div class="flex flex-col gap-2">
 		<label for="visiting">Hvem skal du besøke?</label>
-		{#each members as member}
+		{#each data.members as member}
 			<div>
 				<input
 					type="checkbox"
 					id={member.id}
 					name="visiting"
+					class="cursor-pointer"
 					bind:group={$form.visiting}
 					value={member.id}
 				/>
-				<label for={member.id}>{member.name}</label>
+				<label for={member.id} class="cursor-pointer">{member.name}</label>
 			</div>
 		{/each}
 	</div>

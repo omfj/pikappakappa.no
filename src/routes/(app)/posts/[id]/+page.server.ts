@@ -1,9 +1,11 @@
 import { db } from '$lib/db/drizzle';
-import { posts } from '$lib/db/schemas';
 import { compile } from 'mdsvex';
-import { eq } from 'drizzle-orm';
-import type { PageServerLoad } from './$types';
-import { error } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
+import { error, fail } from '@sveltejs/kit';
+import { superValidate } from 'sveltekit-superforms/server';
+import { commentSchema } from '$lib/validators/comment';
+import { comments } from '$lib/db/schemas';
+import { buildCommentTree, type Comment } from '$lib/comments';
 
 export const load = (async ({ params }) => {
 	const { id } = params;
@@ -31,9 +33,63 @@ export const load = (async ({ params }) => {
 	};
 	const body = await compile(post.body);
 
+	const commentsByPostId = (await db.query.comments.findMany({
+		where: (comment, { eq }) => eq(comment.postId, id),
+		with: {
+			user: {
+				columns: {
+					username: true
+				}
+			}
+		},
+		columns: {
+			id: true,
+			commentId: true,
+			body: true,
+			createdAt: true
+		}
+	})) as unknown as Array<Comment>;
+
+	const comments = buildCommentTree(commentsByPostId);
+
+	const form = await superValidate(commentSchema);
+
 	return {
 		title,
 		author: author(),
-		body: body?.code
+		body: body?.code,
+		comments,
+		postId: id,
+		form
 	};
 }) satisfies PageServerLoad;
+
+export const actions = {
+	default: async ({ locals, request, params }) => {
+		const { id } = params;
+		const form = await superValidate(request, commentSchema);
+
+		if (!locals.user) {
+			return fail(401, {
+				form: { ...form, errors: { body: 'Du må logge inn for å kommentere' } }
+			});
+		}
+
+		if (!form.valid) {
+			return fail(400, { form });
+		}
+
+		const { body, parentId } = form.data;
+
+		await db.insert(comments).values({
+			userId: locals.user.id,
+			postId: id,
+			commentId: parentId || null,
+			body
+		});
+
+		return {
+			form
+		};
+	}
+} satisfies Actions;
