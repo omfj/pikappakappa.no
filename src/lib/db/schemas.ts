@@ -7,7 +7,8 @@ import {
 	timestamp,
 	uniqueIndex,
 	uuid,
-	varchar
+	varchar,
+	type AnyPgColumn
 } from 'drizzle-orm/pg-core';
 
 /**
@@ -136,4 +137,39 @@ export const visitsToUsersRelations = relations(visitsToUsers, ({ one }) => ({
 		fields: [visitsToUsers.userId],
 		references: [users.id]
 	})
+}));
+
+/**
+ * COMMENTS
+ */
+export const comments = pgTable('comments', {
+	id: uuid('id').defaultRandom().primaryKey(),
+	userId: uuid('user_id')
+		.notNull()
+		.references(() => users.id),
+	postId: uuid('post_id')
+		.notNull()
+		.references(() => posts.id),
+	// `AnyPgColumn` is used here because the `commentId` column references the `id` column of the same table.
+	commentId: uuid('comment_id').references((): AnyPgColumn => comments.id),
+	body: text('body').notNull(),
+	createdAt: timestamp('created_at').defaultNow().notNull()
+});
+export type DrizzleComment = InferModel<typeof comments>;
+export type DrizzleCommentInsert = InferModel<typeof comments, 'insert'>;
+
+export const commentsRelations = relations(comments, ({ one, many }) => ({
+	user: one(users, {
+		fields: [comments.userId],
+		references: [users.id]
+	}),
+	post: one(posts, {
+		fields: [comments.postId],
+		references: [posts.id]
+	}),
+	comment: one(comments, {
+		fields: [comments.commentId],
+		references: [comments.id]
+	}),
+	replies: many(comments)
 }));

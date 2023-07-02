@@ -1,13 +1,20 @@
 <script lang="ts">
+	import { formatDate } from '$lib/utils/date';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
+<svelte:head>
+	<title>Innlegg</title>
+</svelte:head>
+
 <h1 class="text-3xl mb-5">Innlegg</h1>
 
 {#if data.canPost}
-	<a href="/posts/new" class="text-lg bg-blue-600 text-white px-3 py-2 mx-auto rounded"
+	<a
+		href="/posts/new"
+		class="text-lg bg-blue-600 mb-5 block max-w-xs w-full text-center text-white px-3 py-2 mx-auto rounded"
 		>Nytt innlegg</a
 	>
 {/if}
@@ -16,10 +23,13 @@
 	<p class="text-xl text-center">Finner ingen innlegg ☹️</p>
 {/if}
 
-{#each data.posts as post}
-	<div class="flex flex-col gap-2 my-5 p-3 rounded-lg bg-gray-100">
-		<h1 class="text-xl font-medium">{post.title}</h1>
-		<p class="text-slate-700">{post.body.slice(0, 20)}</p>
-		<a class="text-blue-600 hover:underline" href={`/posts/${post.id}`}>&rarr; Les mer</a>
-	</div>
-{/each}
+<div class="divide-y">
+	{#each data.posts as post}
+		<div class="py-2">
+			<a href={`/posts/${post.id}`} class="block hover:bg-gray-100 p-4 rounded-xl">
+				<h1 class="text-xl font-medium">{post.title}</h1>
+				<p class="text-sm text-gray-400">Publisert: {formatDate(post.createdAt)}</p>
+			</a>
+		</div>
+	{/each}
+</div>

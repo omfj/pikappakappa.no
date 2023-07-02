@@ -1,27 +1,16 @@
 import { db } from '$lib/db/drizzle';
-import { error, fail } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { superValidate } from 'sveltekit-superforms/server';
 import { visitSchema } from '$lib/validators/visit';
 import { users, visits, visitsToUsers } from '$lib/db/schemas';
 import { and, eq, inArray, or } from 'drizzle-orm';
 
-export const prerender = true;
-
 export const load = (async () => {
-	const members = await db.query.users.findMany({
-		where: (member, { eq, or }) => or(eq(member.type, 'MEMBER'), eq(member.type, 'ADMIN'))
-	});
-
-	if (members.length === 0) {
-		throw error(404, 'No members found.');
-	}
-
 	const form = await superValidate(visitSchema);
 
 	return {
-		form,
-		members
+		form
 	};
 }) satisfies PageServerLoad;
 
